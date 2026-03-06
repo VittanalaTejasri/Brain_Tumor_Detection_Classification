@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain Tumor MRI Classification</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #eef2f3, #d9e4f5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+            width: 700px;   
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+        .description {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #eaf4ff;
+            border-radius: 10px;
+            font-size: 15px;
+            color: #2c3e50;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f4f8fb;
+            border-radius: 12px;
+        }
+
+        .prediction {
+            font-size: 20px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .confidence {
+            color: #16a085;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Brain Tumor MRI Classification</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+
+        <div class="prediction">
+            Prediction: {{ prediction }}
+        </div>
+
+        <div class="confidence">
+            Confidence: {{ confidence }}%
+        </div>
+        <br>
+
+        <div class="description">
+             {{ tumor_info }}
+        </div>
+
+      
+
+        <h3>Grad-CAM</h3>
+        <img src="{{ gradcam_image }}" width="250">
+
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
